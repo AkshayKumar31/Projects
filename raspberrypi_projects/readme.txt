@@ -1,0 +1,2 @@
+clone_code - helps import the code on raspberry to the computer using SSH connection over a local network (like a phone hotspot)
+You need to tweak the file paths and ips to run the code. Direct cloning won't work. 
