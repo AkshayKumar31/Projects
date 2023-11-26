@@ -1,5 +1,6 @@
-Create folders stock_timeseries, and stock_fundamentals. Inside noth these folders create folders NSE and BSE
-
+Create folders stock_timeseries, and stock_fundamentals. Inside both these folders create folders NSE and BSE
+Create another folder super_trend_strategy for storing processed files for super trend analysis. 
+Creaye static folder to add css scripts later for web app. 
 
 
 Twelve Data Notes:
