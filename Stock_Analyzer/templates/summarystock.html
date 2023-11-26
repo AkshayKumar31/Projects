@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+	<form method="POST">
+	    <button type="submit" name="action" value="home_page">Home Page</button> 
+		<button type="submit" name="action" value="generate_summary">Generate Data Summary</button> 
+		<button type="submit" name="action" value="fill_all">Update All</button> 
+	</form>
+	<br>
+	<br>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Min Date</th>
+				<th>Max Date</th>
+				<th>Missing Date Percentage</th>
+				<th>Growth 30 Days</th>
+				<th>Avg Volume 30 days</th>
+				<th>Growth 7 Days</th>
+				<th>Avg Volume 7 days</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data.iterrows() %}
+                <tr>
+                    <td>{{ row['symbol'] }}</td>
+					<td>{{ row['min_date'] }}</td>
+					<td>{{ row['max_date'] }}</td>
+					<td>{{ row['missing_dates_per'] }}</td>
+					<td>{{ row['growth_per_30'] }}</td>
+					<td>{{ row['avg_vol_30'] }}</td>
+					<td>{{ row['growth_per_7'] }}</td>
+					<td>{{ row['avg_vol_7'] }}</td>
+                    <td><button onclick="updateStock('{{ row['symbol'] }}')">Update Stock</button></td>
+					<td><button onclick="showMissingDates('{{ row['symbol'] }}')">Show Missing Dates</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function updateStock(name) {
+            const actionURL = `/update_${name}`;
+			const actionValue = `update_${name}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+        }
+		function showMissingDates(name) {
+            const actionURL = `/missingdates_${name}`;
+			const actionValue = `missingdates_${name}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+        }
+    </script>
+</body>
+</html>

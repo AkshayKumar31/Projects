@@ -1,0 +1,26 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Updater</title>
+</head>
+<body>
+    <h1>Stock Data Analyzer</h1>
+    <form method="POST">
+        <button type="submit" name="action" value="update_metadata">Update Metadata</button>
+        <button type="submit" name="action" value="update_reference_data">Update Reference Data</button>
+		<br>
+		<br>
+		<label for="stock_data_to_chnage">Select Stock Data to Change:</label>
+        <select name="stock_data_to_chnage" id="stock_data_to_chnage">
+            <option value="stock_BSE">Stock_BSE</option>
+			<option value="stock_NSE">Stock_NSE</option>
+		</select>
+		<button type="submit" name="action" value="add_stock_data">Add Stock Data</button>
+		<button type="submit" name="action" value="analyse_stock_data">Analyse Stock Data</button>
+    </form>
+</body>
+</html>

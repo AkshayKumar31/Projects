@@ -1,0 +1,48 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference Data Updater</title>
+</head>
+<body>
+    <h1>Reference Data Updater</h1>
+    <form method="POST">
+        <label for="reference_data_to_update">Select Reference Data to Update:</label>
+        <select name="reference_data_to_update" id="reference_data_to_update">
+            <option value="stock_BSE">Stock_BSE</option>
+			<option value="stock_NSE">Stock_NSE</option>
+            <option value="forex">Forex</option>
+            <option value="crypto">Crypto</option>
+            <option value="etf_BSE">ETF_BSE</option>
+			<option value="etf_NSE">ETF_NSE</option>
+            <option value="indices_BSE">Indices_BSE</option>
+			<option value="indices_NSE">Indices_NSE</option>
+        </select>
+        <button type="submit" name="action" value="update_reference_data">Update Reference Data</button>
+		<button type="submit" name="action" value="show_data">Show Data</button> 
+		<button type="submit" name="action" value="home_page">Home Page</button> 
+    </form>
+	
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+	
+	<!-- Display the DataFrame table if it exists -->
+    {% if table %}
+    <h2>{{ table_name }} Table</h2>
+    {{ table | safe }}
+    {% endif %}
+	
+</body>
+</html>

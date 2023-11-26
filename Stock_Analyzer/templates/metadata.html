@@ -1,0 +1,43 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Updater</title>
+</head>
+<body>
+    <h1>Metadata Updater</h1>
+    <form method="POST">
+        <label for="metadata_to_update">Select Metadata to Update:</label>
+        <select name="metadata_to_update" id="metadata_to_update">
+            <option value="exchanges">Exchanges</option>
+            <option value="crypto_exchanges">Crypto Exchanges</option>
+            <option value="technical_indicator">Technical Indicator</option>
+        </select>
+        <button type="submit" name="action" value="update_metadata">Update Metadata</button>
+        <button type="submit" name="action" value="show_data">Show Data</button> 
+		<button type="submit" name="action" value="home_page">Home Page</button> 
+    </form>
+	
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+	
+	<!-- Display the DataFrame table if it exists -->
+    {% if table %}
+    <h2>{{ table_name }} Table</h2>
+    {{ table | safe }}
+    {% endif %}
+	
+</body>
+</html>

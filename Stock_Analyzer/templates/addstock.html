@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+	<form method="POST">
+	    <button type="submit" name="action" value="home_page">Home Page</button> 
+		<button type="submit" name="action" value="add_all">Add All</button> 
+		<button type="submit" name="action" value="remove_all">Delete All</button> 
+	</form>
+	<br>
+	<br>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+				<th>Time Series</th>
+				<th>Income Statement</th>
+				<th>Balance Sheet</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data_stocks.iterrows() %}
+                <tr>
+                    <td>{{ row['Name'] }}</td>
+					<td>{{ row['Time Series'] }}</td>
+					<td>{{ row['Income Statement'] }}</td>
+					<td>{{ row['Balance Sheet'] }}</td>
+                    <td><button onclick="addStock('{{ row['Name'] }}')">Add Stock</button></td>
+					<td><button onclick="deleteStock('{{ row['Name'] }}')">Delete Stock</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function addStock(name) {
+            const actionURL = `/update_${name}`;
+			const actionValue = `update_${name}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+        }
+		
+		function deleteStock(name) {
+            const actionURL = `/delete_${name}`;
+			const actionValue = `delete_${name}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+        }
+    </script>
+</body>
+</html>
