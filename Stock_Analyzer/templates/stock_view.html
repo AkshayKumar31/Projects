@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock View</title>
+	<style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+            gap: 30px; /* Increase vertical spacing between items */
+        }
+
+        .image-container {
+            text-align: center;
+            padding-bottom: 20px; /* Add padding at the bottom */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px; /* Add margin at the bottom of the image */
+        }
+
+        .image-container > div {
+            margin-bottom: 10px; /* Add margin at the bottom of each div inside image-container */
+        }
+		
+		.image-container > div:first-child {
+            margin-bottom: 15px; /* Add more margin between image and title */
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <div class="container">
+        {% for image, title in chart_data %}
+            <div class="image-container">
+			    <div>{{ title }}</div>
+                <img src="{{ url_for('get_image', filename=image) }}" alt="{{ title }}">
+            </div>
+        {% endfor %}
+    </div>
+	<br>
+	<br>
+    <div>Stock Description</div>
+    {% if description %}
+    <div>
+        {{ description | safe }}
+    </div>
+    {% endif %}
+	<br>
+    <div>Stock Summary</div>
+    {% if table %}
+    <div>
+        {{ table | safe }}
+    </div>
+    {% endif %}
+	<br>
+    <div>Stock Valuation</div>
+    {% if value %}
+    <div>
+        {{ value | safe }}
+    </div>
+    {% endif %}
+	<br>
+    <div>Stock Dividend</div>
+    {% if dividend %}
+    <div>
+        {{ dividend | safe }}
+    </div>
+    {% endif %}
+	<br>
+    <div>Stock Key Parameters</div>
+    {% if keys_p %}
+    <div>
+        {{ keys_p| safe }}
+    </div>
+    {% endif %}
+	<br>
+    <div>Stock Growth Parameters</div>
+    {% if st_grow %}
+    <div>
+        {{ st_grow| safe }}
+    </div>
+    {% endif %}
+    <br>
+    <div>Stock Balance Sheet</div>
+    {% if balance %}
+    <div>
+        {{ balance | safe }}
+    </div>
+    {% endif %}
+    <br>
+    <div>Stock Income Statement</div>
+    {% if income %}
+    <div>
+        {{ income | safe }}
+    </div>
+    {% endif %}
+</body>
+</html>

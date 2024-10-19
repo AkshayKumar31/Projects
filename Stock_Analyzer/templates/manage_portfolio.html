@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+</head>
+<body>
+    <h1>Manage Portfolio</h1>
+	<form method="POST">
+	    <button type="submit" name="action" value="home_page">Home Page</button> 
+		<button type="submit" name="action" value="portfolio_summary">Portfolio Summary</button> 
+		<br>
+		<h2>Add Ledger</h2>
+		<label for="user">User:</label>
+		<input type="text" id="user" name="user"><br><br>
+		<label for="app">Application:</label>
+		<input type="text" id="app" name="app"><br><br>
+		<label for="symbol">Symbol:</label>
+		<input type="text" id="symbol" name="symbol"><br><br>
+		<label for="action_value">Action:</label>
+		<input type="text" id="action_value" name="action_value"><br><br>
+		<label for="action_number">Action No.:</label>
+		<input type="text" id="action_number" name="action_number"><br><br>
+		<label for="action_date">Action Date:</label>
+		<input type="text" id="action_date" name="action_date"><br><br>
+		<label for="quantity">Quantity:</label>
+		<input type="text" id="quantity" name="quantity"><br><br>
+		<label for="price">Price:</label>
+		<input type="text" id="price" name="price"><br><br>
+		<label for="split_ratio">Split Ratio:</label>
+		<input type="text" id="split_ratio" name="split_ratio"><br><br>
+		<button type="submit" name="action" value="submit_ledger">Submit Ledger</button>
+	</form>
+	<br>
+	<br>
+	<h2>Ledger Details</h2>
+    <table>
+        <thead>
+            <tr>
+			    <th>Timestamp</th>
+				<th>User</th>
+				<th>App</th>
+                <th>Symbol</th>
+                <th>Action</th>
+				<th>Action Date</th>
+				<th>Added Date</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Split Ratio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data.iterrows() %}
+                <tr>
+				    <td>{{ row['timestamp'] }}</td>
+					<td>{{ row['user'] }}</td>
+					<td>{{ row['app'] }}</td>
+                    <td>{{ row['symbol'] }}</td>
+					<td>{{ row['action'] }}</td>
+					<td>{{ row['action_date'] }}</td>
+					<td>{{ row['added_date'] }}</td>
+					<td>{{ row['quantity'] }}</td>
+					<td>{{ row['price'] }}</td>
+					<td>{{ row['split ratio'] }}</td>
+					<td><button onclick="delete_record('{{ row['timestamp'] }}')">Delete Record</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	
+	<script>
+        function delete_record(timestamp) {
+            const actionURL = `/delete_${timestamp}`;
+			const actionValue = `delete_${timestamp}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+        }
+	</script>
+</body>
+</html>

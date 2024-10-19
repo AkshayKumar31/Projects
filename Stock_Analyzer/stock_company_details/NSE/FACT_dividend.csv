@@ -1,0 +1,5 @@
+dividendRate,dividendYield,payoutRatio,lastDividendValue,lastDividendDate,symbol
+1.0,0.001,0.4425,,,FACT
+1.0,0.001,2.5,,,FACT
+0.97,0.001,2.5,,,FACT
+0.97,0.0011,2.5,,,FACT

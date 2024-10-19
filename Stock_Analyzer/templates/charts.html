@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px; /* Increase vertical spacing between items */
+        }
+
+        .image-container {
+            text-align: center;
+            padding-bottom: 20px; /* Add padding at the bottom */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px; /* Add margin at the bottom of the image */
+        }
+
+        .image-container > div {
+            margin-bottom: 10px; /* Add margin at the bottom of each div inside image-container */
+        }
+		
+		.image-container > div:first-child {
+            margin-bottom: 15px; /* Add more margin between image and title */
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+	<form method="POST">
+	    <button type="submit" name="action" value="home_page">Home Page</button> 
+	    <button type="submit" name="action" value="analysis_page">Stock Update Page</button> 
+		<button type="submit" name="action" onclick="refreshData()">Refresh</button> 
+		<button type="submit" name="action" value="clear">clear</button> 
+	</form>
+    <div class="container">
+        {% for image, title, absolute_max, absolute_min, curr_min, curr_max in chart_data %}
+            <div class="image-container">
+                <img src="{{ url_for('get_image', filename=image) }}" alt="{{ title }}">
+                <div>{{ title }}</div>
+                {% if title == 'latest_signal' %}
+                    <div>
+                        <label for="min_{{ title }}">Buy:</label>
+                        <input type="text" id="min_{{ title }}" name="min_{{ title }}">
+                    </div>
+                    <div>
+                        <label for="max_{{ title }}">Sell:</label>
+                        <input type="text" id="max_{{ title }}" name="max_{{ title }}">
+                    </div>
+                {% else %}
+                    <div>
+                        <label for="min_{{ title }}">Min:</label>
+                        <input type="text" id="min_{{ title }}" name="min_{{ title }}">
+                    </div>
+                    <div>
+                        <label for="max_{{ title }}">Max:</label>
+                        <input type="text" id="max_{{ title }}" name="max_{{ title }}">
+                    </div>
+                {% endif %}
+				<div>Abs Min Value:{{ absolute_min }}  -  Abs Max Value:{{ absolute_max }}</div>
+				<div>Curr Min Value:{{ curr_min }}  -  Curr Max Value:{{ curr_max }}</div>
+            </div>
+        {% endfor %}
+    </div>
+	<br>
+	<br>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+				<th>Max Date</th>
+				<th>Closing Price</th>
+				<th>Growth 30 Days</th>
+				<th>Avg Volume 30 days</th>
+				<th>Growth 7 Days</th>
+				<th>Avg Volume 7 days</th>
+				<th>Lastest Signal</th>
+				<th>Signal Start</th>
+				<th>Signal Duration (Days)</th>
+				<th>Latest Trend</th>
+				<th>Trend Start</th>
+				<th>Trend Duration (Days)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data.iterrows() %}
+                <tr>
+                    <td>{{ row['symbol'] }}</td>
+					<td>{{ row['max_date'] }}</td>
+					<td>{{ row['latest_closing_price'] }}</td>
+					<td>{{ row['growth_per_30'] }}</td>
+					<td>{{ row['avg_vol_30'] }}</td>
+					<td>{{ row['growth_per_7'] }}</td>
+					<td>{{ row['avg_vol_7'] }}</td>
+					<td>{{ row['latest_signal'] }}</td>
+					<td>{{ row['signal_start_date'] }}</td>
+					<td>{{ row['signal_duration'] }}</td>
+					<td>{{ row['latest_trend'] }}</td>
+					<td>{{ row['trend_start_date'] }}</td>
+					<td>{{ row['trend_duration'] }}</td>
+					<td><button onclick="analyzeStock('{{ row['symbol'] }}')">Analyze Stock</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	<script>
+function refreshData() {
+    var dataToSend = [];
+    var containers = document.getElementsByClassName('image-container');
+    for (var i = 0; i < containers.length; i++) {
+        var container = containers[i];
+        var title = container.getElementsByTagName('div')[0].textContent.trim(); // Assuming the title is the first div child element
+        var minInput = container.querySelector('[id^="min_"]');
+        var maxInput = container.querySelector('[id^="max_"]');
+        var min = minInput.value.trim();
+        var max = maxInput.value.trim();
+        if (min && max) { // Only add data if both min and max are available
+           dataToSend.push(title + ':' + min + ':' + max);
+        }
+    }
+    if (dataToSend.length > 0) { // Only send data if there is at least one value
+        // Send data to backend via AJAX
+		var dynamicURLPart = window.location.pathname;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', dynamicURLPart, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Set Content-Type to form-urlencoded
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log('Data sent successfully');
+            } else {
+                console.error('Failed to send data');
+            }
+        };
+        xhr.send('data=' + dataToSend.join(' ')); // Convert data to query string format before sending
+    }
+}
+
+
+// Define the analyzeStock function
+    function analyzeStock(symbol) {
+        const actionURL = `/analyze_${symbol}`;
+			const actionValue = `analyze_${symbol}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+    }
+</script>
+</body>

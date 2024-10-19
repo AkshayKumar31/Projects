@@ -1,0 +1,91 @@
+Based on the provided data, here are some useful details about the company "20 Microns Limited":
+
+### Basic Information
+- **Company Name:** 20 Microns Limited
+- **Ticker Symbol:** 20MICRONS.NS
+- **Exchange:** National Stock Exchange of India (NSI)
+- **Short Name:** 20 MICRONS LTD
+- **Industry:** Not explicitly provided, but the name suggests it is involved in micronized minerals or similar products.
+
+### Financial Metrics
+- **Current Price:** ₹169.25
+- **Market Capitalization:** ₹5,972,239,872
+- **Enterprise Value:** ₹6,839,561,728
+- **Revenue (Trailing 12 Months):** ₹7,815,580,160
+- **Net Income to Common:** ₹560,697,984
+- **EBITDA:** ₹1,091,992,064
+- **Total Debt:** ₹1,213,693,056
+- **Total Cash:** ₹603,025,024
+- **Free Cash Flow:** ₹154,266,752
+- **Operating Cash Flow:** ₹544,433,984
+
+### Valuation Ratios
+- **Price to Earnings (P/E) Ratio:** 10.65806
+- **Price to Book (P/B) Ratio:** 1.6906234
+- **Price to Sales (P/S) Ratio:** 0.76414543
+- **Enterprise Value to Revenue (EV/R):** 0.875
+- **Enterprise Value to EBITDA (EV/EBITDA):** 6.263
+
+### Dividend Information
+- **Dividend Rate:** ₹1.25
+- **Dividend Yield:** 0.72%
+- **Payout Ratio:** 4.72%
+- **Last Dividend Date:** August 10, 2024
+- **Ex-Dividend Date:** August 10, 2024
+
+### Stock Performance
+- **52-Week High:** ₹201.0
+- **52-Week Low:** ₹90.1
+- **52-Week Change:** 78.94%
+- **S&P 500 52-Week Change:** 23.33%
+
+### Trading Information
+- **Previous Close:** ₹176.35
+- **Open Price:** ₹176.7
+- **Day Low:** ₹166.85
+- **Day High:** ₹176.7
+- **Bid:** ₹169.85
+- **Ask:** ₹170.1
+- **Volume:** 22,088
+- **Average Volume (10 days):** 165,299
+
+### Analyst Ratings
+- **Target High Price:** ₹110.0
+- **Target Low Price:** ₹110.0
+- **Target Mean Price:** ₹110.0
+- **Target Median Price:** ₹110.0
+- **Recommendation Mean:** 2.0 (Buy)
+- **Number of Analyst Opinions:** 1
+
+### Key Ratios
+- **Quick Ratio:** 0.98
+- **Current Ratio:** 1.752
+- **Debt to Equity Ratio:** 34.276
+- **Profit Margins:** 7.174%
+- **Gross Margins:** 46.787%
+- **EBITDA Margins:** 13.972%
+- **Operating Margins:** 11.208%
+
+### Growth Metrics
+- **Earnings Growth:** 46.7%
+- **Revenue Growth:** 23.2%
+
+### Share Information
+- **Shares Outstanding:** 35,286,500
+- **Float Shares:** 15,320,638
+- **Held Percent by Insiders:** 56.569%
+- **Implied Shares Outstanding:** 36,441,100
+- **Book Value per Share:** ₹100.111
+- **Total Cash per Share:** ₹17.104
+
+### Other Information
+- **Time Zone:** Asia/Kolkata (IST)
+- **UUID:** 036509d4-9f25-3099-a500-d68f5173bb13
+- **Message Board ID:** finmb_137821
+
+### Historical Information
+- **First Trade Date (Epoch UTC):** October 6, 2008
+- **Last Split Date:** January 28, 2013
+- **Last Split Factor:** 2:1
+
+This information provides a comprehensive overview of the company's financial health, stock performance, valuation, and trading metrics.

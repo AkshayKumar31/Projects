@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stocks</title>
+	<style>
+        .red-text {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>{{ title }}</h1>
@@ -21,16 +26,26 @@
 				<th>Time Series</th>
 				<th>Income Statement</th>
 				<th>Balance Sheet</th>
+				<th>Stock Summary</th>
+				<th>Valuation</th>
+				<th>Dividend Info</th>
+				<th>Key Ratios</th>
+				<th>Growth Metrics</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for index, row in data_stocks.iterrows() %}
-                <tr>
+                <tr {% if "." in row['Name'] %} class="red-text" {% endif %}>
                     <td>{{ row['Name'] }}</td>
 					<td>{{ row['Time Series'] }}</td>
 					<td>{{ row['Income Statement'] }}</td>
 					<td>{{ row['Balance Sheet'] }}</td>
+					<td>{{ row['Stock Summary'] }}</td>
+					<td>{{ row['Valuation'] }}</td>
+					<td>{{ row['Dividend Info'] }}</td>
+					<td>{{ row['Key Ratios'] }}</td>
+					<td>{{ row['Growth Metrics'] }}</td>
                     <td><button onclick="addStock('{{ row['Name'] }}')">Add Stock</button></td>
 					<td><button onclick="deleteStock('{{ row['Name'] }}')">Delete Stock</button></td>
                 </tr>

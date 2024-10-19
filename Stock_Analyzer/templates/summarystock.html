@@ -11,6 +11,7 @@
 	    <button type="submit" name="action" value="home_page">Home Page</button> 
 		<button type="submit" name="action" value="generate_summary">Generate Data Summary</button> 
 		<button type="submit" name="action" value="fill_all">Update All</button> 
+		<button type="submit" name="action" value="charts">Analysis Charts</button>
 	</form>
 	<br>
 	<br>
@@ -21,10 +22,7 @@
                 <th>Min Date</th>
 				<th>Max Date</th>
 				<th>Missing Date Percentage</th>
-				<th>Growth 30 Days</th>
-				<th>Avg Volume 30 days</th>
-				<th>Growth 7 Days</th>
-				<th>Avg Volume 7 days</th>
+				<th>Closing Price</th>
             </tr>
         </thead>
         <tbody>
@@ -34,12 +32,8 @@
 					<td>{{ row['min_date'] }}</td>
 					<td>{{ row['max_date'] }}</td>
 					<td>{{ row['missing_dates_per'] }}</td>
-					<td>{{ row['growth_per_30'] }}</td>
-					<td>{{ row['avg_vol_30'] }}</td>
-					<td>{{ row['growth_per_7'] }}</td>
-					<td>{{ row['avg_vol_7'] }}</td>
+					<td>{{ row['latest_closing_price'] }}</td>
                     <td><button onclick="updateStock('{{ row['symbol'] }}')">Update Stock</button></td>
-					<td><button onclick="showMissingDates('{{ row['symbol'] }}')">Show Missing Dates</button></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -70,7 +64,7 @@
             // Submit the form
             form.submit();
         }
-		function showMissingDates(name) {
+		function analyzeStock(name) {
             const actionURL = `/missingdates_${name}`;
 			const actionValue = `missingdates_${name}`;
     

@@ -5,12 +5,17 @@ Created on Sun Nov  5 12:38:05 2023
 @author: aksha
 """
 
+# https://zoo.cs.yale.edu/classes/cs458/lectures/yfinance.html
+# https://analyzingalpha.com/yfinance-python
+# https://stackoverflow.com/questions/77335540/did-yfinance-stop-working-its-returning-404-after-calling-the-info-function
+
 import yfinance as yf
 
-msft = yf.Ticker("HDFC.NS")
+msft = yf.Ticker("AAPL")
+#print(dir(msft))
 
 # get all stock info
-#msft.info
+print(msft.info)
 
 # get historical market data
 #hist = msft.history(period="1mo")
@@ -41,7 +46,7 @@ msft = yf.Ticker("HDFC.NS")
 # see `Ticker.get_income_stmt()` for more options
 
 # show holders
-print(msft.major_holders)
+#print(msft.major_holders)
 #print(msft.institutional_holders)
 #print(msft.mutualfund_holders)
 
@@ -57,7 +62,7 @@ print(msft.major_holders)
 #print(msft.options)
 
 # show news
-print(msft.news)
+#print(msft.news)
 
 # get option chain for specific expiration
 #opt = msft.option_chain('YYYY-MM-DD')

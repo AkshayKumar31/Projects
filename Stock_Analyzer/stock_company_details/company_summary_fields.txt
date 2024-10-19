@@ -1,0 +1,7 @@
+{
+  "company_description": ["country", "industry", "sector", "longBusinessSummary"],
+  "valuation_ratios": ["priceToSalesTrailing12Months", "priceToBook", "trailingPE", "enterpriseToRevenue", "enterpriseToEbitda"],
+  "dividend_info": ["dividendRate", "dividendYield", "payoutRatio", "lastDividendValue", "lastDividendDate"],
+  "key_ratios": ["quickRatio", "currentRatio", "debtToEquity", "profitMargins", "grossMargins", "ebitdaMargins", "operatingMargins", "returnOnAssets", "returnOnEquity"],
+  "growth_metrics": ["earningsGrowth", "revenueGrowth"]
+}

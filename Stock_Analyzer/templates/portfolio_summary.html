@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Summary</title>
+</head>
+<body>
+    <h1>Portfolio:{{ user }}:{{ exchange }}</h1>
+	<form method="POST">
+	    <button type="submit" name="action" value="home_page">Home Page</button> 
+		<button type="submit" name="action" value="manage_portfolio">Manage Portfolio</button>
+		<br>
+		<br>
+		<label for="exchange">Stock Exchange:</label>
+        <select name="exchange" id="exchange">
+            <option value="stock_BSE">Stock_BSE</option>
+			<option value="stock_NSE">Stock_NSE</option>
+		</select>
+		<label for="user">User Name:</label>
+        <select name="user" id="user">
+            <option value="Akshay">Akshay</option>
+			<option value="Anant">Anant</option>
+		</select>
+		<button type="submit" name="action" value="update_port_summary">Update Portfolio Summary</button>
+		<button type="submit" name="action" value="add_portfolio">Add Portfolio Stocks</button>
+		<button type="submit" name="action" value="update_port_stocks">Update Portfolio Stocks</button>
+		<button type="submit" name="action" value="remove_data">Delete Todays Data</button>
+	</form>
+	<br>
+	<br>
+	<h2>Portfolio Summary</h2>
+	   <p><strong>Current Investment:</strong> {{ principle_amount }} </p>
+       <p><strong>Realized Total Profits:</strong> {{ real_tot_profit }} </p>
+       <p><strong>Unrealized Total Profits:</strong> {{ unreal_tot_profit }} </p>
+	<br>
+	<br>
+	<h3>Portfolio Details</h3>
+    <table>
+        <thead>
+            <tr>
+			    <th>Symbol</th>
+				<th>Stock Exchange</th>
+				<th>User</th>
+				<th>Latest Data</th>
+				<th>Closing Price</th>
+                <th>Last Action</th>
+                <th>Last Action Date</th>
+				<th>Current Principle</th>
+				<th>Current Quantity</th>
+				<th>Current Avg Buy Price</th>
+				<th>Realized P/L</th>
+				<th>Unrealized P/L</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data.iterrows() %}
+                <tr>
+                    <td>{{ row['symbol'] }}</td>
+					<td>{{ row['exchange'] }}</td>
+					<td>{{ row['user_name'] }}</td>
+					<td>{{ row['latest_date'] }}</td>
+					<td>{{ row['closing_price'] }}</td>
+					<td>{{ row['last_action'] }}</td>
+					<td>{{ row['last_action_date'] }}</td>
+					<td>{{ row['current_principle'] }}</td>
+					<td>{{ row['current_quantity'] }}</td>
+					<td>{{ row['current_buy_price_avg'] }}</td>
+					<td>{{ row['total_PL'] }}</td>
+					<td>{{ row['unrealized_PL'] }}</td>
+					<td><button onclick="view_stock('{{ row['symbol'] }}', '{{ row['exchange'] }}', '{{ row['user_name'] }}')">View Stock</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	
+	<script>
+        function view_stock(symbol, exchange, user_name) {
+            const actionURL = `/view_${symbol}_${exchange}_${user_name}`;
+			const actionValue = `view_${symbol}_${exchange}_${user_name}`;
+    
+            // Create a hidden form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            //form.action = actionURL;
+    
+            // Create an input element to hold the action value
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = actionValue; // Set the desired action value
+    
+            // Append the input element to the form
+            form.appendChild(actionInput);
+    
+            // Append the form to the document body
+            document.body.appendChild(form);
+    
+            // Submit the form
+            form.submit();
+        }
+	</script>
+
+</body>
+</html>
